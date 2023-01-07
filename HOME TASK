@@ -1,0 +1,79 @@
+input[type="text"], input[type="password"] {
+  background-color: #ffffff; /* default background color */
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+  background-color: #e6f2ff; /* background color when focus is set */
+}
+To set the image width and height, you can use the width and height properties in CSS. For example:
+
+Copy code
+img {
+  width: 100px;
+  height: 100px;
+}
+
+To position the image on the top-left corner using absolute and relative position combinations, you can use the position property in CSS. First, you need to set the parent element of the image as position: relative. Then, you can set the image as position: absolute and use the top and left properties to position it. For example:
+
+Copy code
+.login-form {
+  position: relative;
+}
+
+img {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+For the JavaScript part, you can use the following code:
+
+Copy code
+// findInputs function
+function findInputs() {
+  return document.querySelectorAll('input');
+}
+
+// validateInputs function
+function validateInputs() {
+  let inputs = findInputs();
+  for (let i = 0; i < inputs.length; i++) {
+    if (inputs[i].name === 'loginId' || inputs[i].name === 'password') {
+      if (inputs[i].value === '') {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+// login function
+function login() {
+  let checkbox = document.querySelector('input[type="checkbox"]');
+  if (checkbox.checked) {
+    alert('Logged in successfully with Remember Me marked as set');
+  } else {
+    alert('Logged in successfully');
+  }
+}
+
+// clear function
+function clear() {
+  let inputs = findInputs();
+  for (let i = 0; i < inputs.length; i++) {
+    inputs[i].value = '';
+  }
+}
+
+// OK button click event
+let okButton = document.querySelector('input[value="OK"]');
+okButton.addEventListener('click', function() {
+  if (!validateInputs()) {
+    alert('Please enter a Login ID and Password');
+    return;
+  }
+  login();
+});
+
+// Cancel button click event
+let cancelButton = document.querySelector('input[value="Cancel"]');
+cancelButton.addEventListener('click', clear);
